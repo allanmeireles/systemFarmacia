@@ -8,16 +8,16 @@ import java.sql.SQLException;
 import db.DB;
 import db.DBExeception;
 
-public class cliente {
-	private int idCliente;
-	private String nome; 
+public class funcionario {
+	private int matriculaFunc;
+	private String nome;
 	
-	public cliente() {
+	public funcionario () {
 		
 	}
 
-	public cliente(int idCliente, String nome) {
-		this.idCliente = idCliente;
+	public funcionario(int matriculaFunc, String nome) {
+		this.matriculaFunc = matriculaFunc;
 		this.nome = nome;
 	}
 	
@@ -25,7 +25,7 @@ public class cliente {
 		PreparedStatement st = null;
 		
 		try {
-				st = comn.prepareStatement("INSERT INTO cliente (nome) VALUES (?))");
+				st = comn.prepareStatement("INSERT INTO funcionario (nome) VALUES (?))");
 				
 				st.setString(1, nome);
 				st.executeUpdate();
@@ -43,12 +43,12 @@ public class cliente {
 		ResultSet rs = null;
 		
 		try {
-			st = comn.prepareStatement("SELECT * FROM cliente");
+			st = comn.prepareStatement("SELECT * FROM funcionario");
 			
 			rs = st.executeQuery();
 			
 			while(rs.next()) {
-				System.out.println(" ID:" + rs.getInt(idCliente) + "Nome: " + rs.getString("nome"));
+				System.out.println("Registro: " + rs.getInt(matriculaFunc) + "Nome: " + rs.getString("nome"));
 			}
 		}
 		catch(SQLException e) {
@@ -59,8 +59,8 @@ public class cliente {
 	public void excluirCli(Connection comn) {
 		PreparedStatement st = null;
 		try {
-			st = comn.prepareStatement("DELETE FROM cliente WHERE id = ?");
-			st.setInt(1, idCliente);
+			st = comn.prepareStatement("DELETE FROM funcionario WHERE id = ?");
+			st.setInt(1, matriculaFunc);
 			st.executeUpdate();
 		}
 		catch(SQLException e){
@@ -70,4 +70,5 @@ public class cliente {
 	}
 	
 	
+
 }
